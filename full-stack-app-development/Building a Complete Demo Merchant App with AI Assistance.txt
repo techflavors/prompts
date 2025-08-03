@@ -1,0 +1,63 @@
+You are a senior full-stack developer. Create a complete demo merchant 
+application with the following specifications:
+
+Project: Billing interface web app from attached mockup
+Technology: Static HTML/CSS/JS with Node.js backend and PostgreSQL database
+Architecture: SPA with sidebar navigation, dynamic content loading, and full-stack API
+
+Frontend Features:
+- Responsive dashboard matching mockup design
+- Sidebar: Manage Plan, Manage Usage, Show Transactions
+- Dynamic iframe injection via custom SDK
+- AJAX-based transaction loading with pagination and filtering
+- Demo environment indicators
+
+Backend Features:
+- Express.js API with PostgreSQL integration
+- Transaction endpoints: GET /api/transactions (with filtering), GET /api/transactions/:id
+- Database connection with pg library and connection pooling
+- Input validation and sanitization middleware
+- Security: prepared statements, CORS configuration
+
+Database Schema:
+CREATE TABLE transactions (
+    id SERIAL PRIMARY KEY,
+    transaction_id VARCHAR(20) UNIQUE NOT NULL,
+    transaction_date DATE NOT NULL,
+    payment_method_type VARCHAR(20) NOT NULL,
+    payment_method_last4 VARCHAR(4),
+    amount DECIMAL(10,2) NOT NULL,
+    status VARCHAR(20) CHECK (status IN ('Completed', 'Pending', 'Failed')),
+    user_id INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Sample Data:
+INSERT INTO transactions VALUES
+('TXN-78912345', '2025-07-25', 'Visa', '4242', 234.56, 'Completed', 1),
+('TXN-78912346', '2025-07-22', 'Mastercard', '5678', 45.99, 'Completed', 1),
+('TXN-78912347', '2025-07-19', 'PayPal', NULL, 129.00, 'Pending', 1);
+
+Full-Stack Integration:
+- Dynamic transaction loading replacing static content
+- Loading states and comprehensive error handling
+- Search and filter functionality with backend queries
+- Pagination controls with database offset/limit
+- Real-time data rendering with proper formatting
+
+Technical Stack:
+- Frontend: Modern CSS (Grid/Flexbox), vanilla JavaScript with modular SDK
+- Backend: Node.js Express with PostgreSQL, connection pooling
+- Database: Complete schema with indexing and sample data
+- DevOps: GitHub Actions workflow for automated deployment
+
+Deliverables:
+- Complete project structure with all source files
+- Database setup scripts and migrations
+- Development server with hot reload and CORS
+- API endpoints with comprehensive error handling
+- CI/CD pipeline for GitHub Pages
+- Comprehensive README with development workflow
+
+Quality: Semantic HTML, optimized performance, cross-browser compatibility, 
+security best practices (SQL injection prevention, iframe sandboxing, CSP headers)
