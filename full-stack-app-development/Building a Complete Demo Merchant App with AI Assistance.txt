@@ -1,63 +1,92 @@
-You are a senior full-stack developer. Create a complete demo merchant 
-application with the following specifications:
+You are a senior full-stack developer with expertise in web applications and database design. 
+Create a complete demo merchant application based on the attached billing interface mockup.
 
-Project: Billing interface web app from attached mockup
-Technology: Static HTML/CSS/JS with Node.js backend and PostgreSQL database
-Architecture: SPA with sidebar navigation, dynamic content loading, and full-stack API
+**Project Specifications:**
+- Technology Stack: HTML/CSS/JS frontend, Node.js Express backend, PostgreSQL database
+- Deployment: GitHub Pages for frontend, local development server for full-stack testing
+- Architecture: Single-page application with sidebar navigation and dynamic content loading
 
-Frontend Features:
-- Responsive dashboard matching mockup design
-- Sidebar: Manage Plan, Manage Usage, Show Transactions
-- Dynamic iframe injection via custom SDK
-- AJAX-based transaction loading with pagination and filtering
-- Demo environment indicators
+**Frontend Requirements:**
+1. Responsive billing interface matching attached screenshot exactly
+2. Application header: "Demo Merchant App" (left) + "Logged in as TestCustomer" (right)
+3. Sidebar navigation with three sections:
+   - "Manage Plan": Display billing interface replica as main content
+   - "Manage Usage": Show embedded third-party content with demo notices
+   - "Show Transactions": Dynamic transaction table with real data
 
-Backend Features:
-- Express.js API with PostgreSQL integration
-- Transaction endpoints: GET /api/transactions (with filtering), GET /api/transactions/:id
-- Database connection with pg library and connection pooling
-- Input validation and sanitization middleware
-- Security: prepared statements, CORS configuration
+**Dynamic Content System:**
+1. Create modular SDK (thirdparty-sdk.js) for iframe injection
+2. Implement AJAX-based content loading for transaction data
+3. Dynamic iframe creation with iframe.contentDocument.write() for security isolation
+4. Loading states, error handling, and responsive design throughout
 
-Database Schema:
-CREATE TABLE transactions (
-    id SERIAL PRIMARY KEY,
-    transaction_id VARCHAR(20) UNIQUE NOT NULL,
-    transaction_date DATE NOT NULL,
-    payment_method_type VARCHAR(20) NOT NULL,
-    payment_method_last4 VARCHAR(4),
-    amount DECIMAL(10,2) NOT NULL,
-    status VARCHAR(20) CHECK (status IN ('Completed', 'Pending', 'Failed')),
-    user_id INTEGER,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+**Backend API Requirements:**
+1. Express.js server with static file serving and CORS configuration
+2. RESTful endpoints:
+   - GET /api/transactions (with filtering, pagination, sorting)
+   - GET /api/transactions/:id (individual transaction details)
+   - POST /api/transactions (create new transactions)
+3. PostgreSQL integration with connection pooling
+4. Input validation and sanitization middleware
+5. Comprehensive error handling and structured logging
 
-Sample Data:
-INSERT INTO transactions VALUES
-('TXN-78912345', '2025-07-25', 'Visa', '4242', 234.56, 'Completed', 1),
-('TXN-78912346', '2025-07-22', 'Mastercard', '5678', 45.99, 'Completed', 1),
-('TXN-78912347', '2025-07-19', 'PayPal', NULL, 129.00, 'Pending', 1);
+**Database Schema:**
+Analyze the transaction display format and create a matching PostgreSQL schema:
+- Transaction ID (unique identifier)
+- Transaction Date (with proper indexing)
+- Payment Method Type (Visa, Mastercard, PayPal, etc.)
+- Payment Method Details (last 4 digits for cards)
+- Amount (decimal precision for currency)
+- Status (Completed, Pending, Failed with constraints)
+- Audit timestamps (created_at, updated_at)
+- Proper indexing for performance queries
 
-Full-Stack Integration:
-- Dynamic transaction loading replacing static content
-- Loading states and comprehensive error handling
-- Search and filter functionality with backend queries
-- Pagination controls with database offset/limit
-- Real-time data rendering with proper formatting
+**Sample Data Generation:**
+Insert 15-20 realistic transaction records spanning different:
+- Payment methods (credit cards, PayPal, bank transfers)
+- Amount ranges ($10 to $5,000)
+- Status types across recent dates
+- Formatted for immediate frontend consumption
 
-Technical Stack:
-- Frontend: Modern CSS (Grid/Flexbox), vanilla JavaScript with modular SDK
-- Backend: Node.js Express with PostgreSQL, connection pooling
-- Database: Complete schema with indexing and sample data
-- DevOps: GitHub Actions workflow for automated deployment
+**Security Implementation:**
+1. SQL injection prevention using prepared statements
+2. Input validation with comprehensive sanitization
+3. CORS configuration for production deployment
+4. Environment variable management for database credentials
+5. CSP headers and iframe sandboxing for content security
 
-Deliverables:
-- Complete project structure with all source files
-- Database setup scripts and migrations
-- Development server with hot reload and CORS
-- API endpoints with comprehensive error handling
-- CI/CD pipeline for GitHub Pages
-- Comprehensive README with development workflow
+**Development Workflow:**
+1. Local development server with hot reload (nodemon)
+2. GitHub Actions workflow for automated deployment
+3. Database migration scripts for version control
+4. Environment configuration (.env) for different deployment stages
+5. Comprehensive README with setup and deployment instructions
 
-Quality: Semantic HTML, optimized performance, cross-browser compatibility, 
-security best practices (SQL injection prevention, iframe sandboxing, CSP headers)
+**Implementation Priority:**
+1. Create static frontend matching mockup design
+2. Implement sidebar navigation and basic routing
+3. Build dynamic SDK for content injection
+4. Create Node.js server with static file serving
+5. Design and create PostgreSQL database schema
+6. Implement API endpoints with database integration
+7. Connect frontend to backend with dynamic data loading
+8. Add filtering, pagination, and search functionality
+9. Implement comprehensive error handling and loading states
+10. Setup automated testing and deployment pipeline
+
+**Quality Standards:**
+- Semantic HTML with proper accessibility attributes
+- Mobile-first responsive design with CSS Grid/Flexbox
+- Modern JavaScript with ES6+ features and proper error boundaries
+- RESTful API design with consistent response formats
+- Database queries optimized for performance
+- Production-ready security practices throughout
+
+**Deliverables:**
+- Complete project structure with organized file hierarchy
+- Frontend application with dynamic content loading
+- Backend API with database integration
+- Database schema with sample data and migrations
+- Development server with CORS and middleware
+- GitHub Actions deployment pipeline
+- Comprehensive documentation and setup guides
