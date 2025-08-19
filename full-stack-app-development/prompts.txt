@@ -1,0 +1,44 @@
+Step 1: 
+Create a static HTML website that replicates the interface shown in the
+attached screenshot. Build it as a single HTML file with embedded CSS
+and JavaScript, optimized for GitHub Pages hosting.
+
+Step 2: 
+Add the following updates to the website:
+Header section with title "Demo Merchant App" on the left and "Logged in as TestCustomer" on the right
+Layout restructure with left sidebar navigation menu and main content area on the right
+
+Sidebar menu items: "Manage Plan" (display billing interface replica) and "Manage Usage" (show iframe content with sample data)
+
+Step 3:
+Replace the static iframe with dynamic JavaScript injection. Create a script
+called "thirdparty-sdk.js" that programmatically creates and injects the
+iframe into the page when needed.
+
+Step 4:
+Add a new sidebar menu item called "Show Transactions" that uses AJAX to
+fetch content from transaction.html and displays it within an iframe. Create
+transaction.html as a separate file with a table containing dummy transaction
+data: Transaction ID, Payment Method, Dollar Value.
+
+Step 5:
+AJAX Error: Unable to fetch transaction.html
+Make sure the file exists and is accessible
+
+Step 6: 
+Create a Show Transactions2 menu with a different approach to dynamically create an iframe element, inject it into
+the DOM, and write HTML content directly into the iframe's document using
+iframe.contentDocument.write(). Create a different Java script file if needed so the code for Manage Usage is sepaerately maintained from the code for Show Transactions2
+
+Step 7:
+Create a Node.js Express server to serve the HTML application through HTTP
+endpoints
+
+Step 8:
+Test all functionality and create GitHub Actions for automated deployment
+
+Step 9: 
+Analyze the transaction.html structure and create a PostgreSQL database
+schema that matches the data format. Generate a SQL table with appropriate
+columns and insert realistic sample data that corresponds to the
+transaction display format.
